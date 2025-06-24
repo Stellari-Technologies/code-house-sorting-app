@@ -1,88 +1,38 @@
-import { useState } from "react"
-import Popup from "reactjs-popup"
-import 'reactjs-popup/dist/index.css'
-import ByteBat from "../assets/ByteBat.png"
-import LogicLynx from "../assets/LogicLynxes.png"
-import PixelPanther from "../assets/PixelPanthers.png"
-import ScriptSaber from "../assets/ScriptSabers.png"
+import { houseData } from "../assets/houseData"
+import { HousePopup } from "./HousePopup"
 
-const InfoStyle = {
-    padding: '20px',
-    textAlign: 'center',
-    width: "600px",
-    height: "400px",
-    backgroundColor: "'#f1f1f1'",
-}
-
-const ImageStyle = {
-    width: "300px",
-    height: "300px",
-    border: "10px solid #f11111",
-    "border-radius": "50%",
-    "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    "clip-path": "circle(50%)",
-}
-
-export const Landing = () => {
-    //const [open, setOpen] = useState(false) 
-
-
-    /*const handleOpen = () => {
-        setOpen(!open)
-    }
-    const handleClose = () => {
-        setOpen(!open)
-    }*/
+export const Landing = ({handleToggle, show}) => {
 
     return (
         <div>
+            {!show && 
             <div className="flex flex-col gap-8 my-8 text-center">
-                <h3 className="text-4xl"> Code Ninjas </h3>
-                <h1 className="font-bold text-8xl "> CODE HOUSES </h1>
 
                 <div className="flex flex-row justify-around">
-                    <Popup 
-                        trigger={
-                            <button className="rounded-full">
-                                <img src={PixelPanther} style={ImageStyle} className="rounded-20" alt="Pixel Panther Logo"/>
-                            </button>} 
-                        position={"center center"}
-                        contentStyle={InfoStyle}
-                    >
-                        <div>
-                            This is inside
-                        </div>
-                    </Popup>
-                    <Popup 
-                        trigger={<button className="rounded-full"><img src={ByteBat} style={ImageStyle} alt="Byte Bate Logo"/></button>} 
-                        position={"center center"}
-                        contentStyle={InfoStyle}
-                    >
-                        <div>
-                            This is inside
-                        </div>
-                    </Popup>
-                    <Popup 
-                        trigger={<button className="rounded-full"><img src={LogicLynx} style={ImageStyle} alt="Logic Lynx Logo"/></button>} 
-                        position={"center center"}
-                        contentStyle={InfoStyle}
-                    >
-                        <div>
-                            This is inside
-                        </div>
-                    </Popup>
-                    <Popup 
-                        trigger={<button className="rounded-full"><img src={ScriptSaber} style={ImageStyle} alt="Script Saber Logo"/></button>} 
-                        position={"center center"}
-                        contentStyle={InfoStyle}
-                    >
-                        <div>
-                            This is inside
-                        </div>
-                    </Popup>
+                    {houseData.map((house, key) => {
+                        return <HousePopup 
+                                    key={key} 
+                                    icon={house.image} 
+                                    color={house.color} 
+                                    description={house.description} 
+                                    alt={house.alt} 
+                                    name={house.houseName}
+                                    num={house.num}
+                                />
+                    })}
                 </div>
+                
+                <p className="mt-16">
+                    Find out which house you belong to <br></br>
+                    by pressing the button below!
+                </p>
+                <button onClick={handleToggle} className="self-center bg-yellow-300 box-content size-32-24 border-8 border-yellow-500 p-8 hover:bg-yellow-500 hover:border-yellow-300 hover:text-white"
+                >
+                    Start Quiz!
+                </button>
 
             </div>
+            }
         </div>
     )
 }
