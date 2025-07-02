@@ -1,14 +1,15 @@
 import { useState } from "react"
 import { data } from "../assets/data"
+import { houseData } from "../assets/houseData"
 
-export const Quiz = ({show}) => {
+export const Quiz = ({show, handleToggle}) => {
 
     const [questionIndex, setQuestionIndex] = useState(0)
     const [userName, setUserName] = useState("")
     const [startQuiz, setStartQuiz] = useState(false)
     const [finishQuiz, setFinishQuiz] = useState(false)
-    const [userHouse, setUserHouse] = useState("")
-    const [secondHouse, setSecondHouse] = useState("")
+    //const [secondHouse, setSecondHouse] = useState("") Extra?
+    const [houseInfo, setHouseInfo] = useState()
 
     let userAnswers = []
 
@@ -35,7 +36,24 @@ export const Quiz = ({show}) => {
     }
 
     const getUserHouses = () => {
-        setUserHouse(mostFrequent(userAnswers))
+        let quizResult = mostFrequent(userAnswers)
+
+        switch (quizResult) {
+            case "A":
+                setHouseInfo(houseData[0])
+                break;
+            case "B":
+                setHouseInfo(houseData[2])
+                break;
+            case "C":
+                setHouseInfo(houseData[3])
+                break;
+            case "D":
+                setHouseInfo(houseData[1])
+                break;
+            default:
+                console.log("Error")
+        }
     }
 
     const chooseAnswer = ( chosenAnswer ) => {
@@ -64,6 +82,17 @@ export const Quiz = ({show}) => {
         }
     }
 
+    const resetAll = () => {
+        setStartQuiz(false)
+        setUserName("")
+        setFinishQuiz(false)
+        setHouseInfo()
+        setQuestionIndex(0)
+        handleToggle()
+    }
+
+    
+
     return (
 
         <div>
@@ -90,8 +119,15 @@ export const Quiz = ({show}) => {
                     <div>
                         {finishQuiz ? (
                             <div> 
-                                <p> {userName}..... your house is....</p>
-                                <> {userHouse}</>
+                                <p className="text-4xl text-bold"> {userName}..... your house is....</p>
+                                <div className="flex flex-row gap-8"> 
+                                    <img src={houseInfo.image} alt="" className="rounded-full w-96 border-8 mx-16" />
+                                    <div className="flex flex-col text-center gap-8 mt-16 mx-8">
+                                        <h1 className="text-3xl"> {houseInfo.houseName} </h1>
+                                        <p className="text-start"> {houseInfo.description} </p>
+                                    </div>
+                                </div>
+                                <button onClick={resetAll}> Home </button>
 
                             </div>
                         ):( 
