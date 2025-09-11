@@ -54,7 +54,7 @@ export const HousePopup = ({icon, color, description, alt, name, num}) => {
     const imageStyles = [PantherStyle, BatStyle, LynxStyle, SaberStyle]
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
             <label className="font-bold text-shadow-lg">{name}</label>
             <Popup 
                 trigger={

@@ -8,7 +8,7 @@ export const houseData = [
         houseName: "Pixel Panthers",
         image: PixelPanther,
         color: "ff0000",
-        description: "Creativity, and unusual thinking gets them to stand out from the rest. Their approach might be unusual but it all works out in the end. ",
+        description: "These ninjas are creative and their curiosity is key when solving complex problems. They love to gain inspiration from other disciplines and tie it back into coding. No one compares to them when it comes to creative thinking",
         alt: "Pixel Panther Logo",
         num: 0
     },
